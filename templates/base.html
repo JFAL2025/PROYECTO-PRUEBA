@@ -1,0 +1,216 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SGSF{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #f2f2f2;
+            --text: #2b2b2b;
+            --sidebar-bg: #ffffff;
+            --sidebar-border: #e0e0e0;
+            --sidebar-text: #444;
+            --sidebar-hover-bg: #fff3d9;
+            --sidebar-hover-text: #b35c00;
+            --card-bg: #ffffff;
+            --card-border: #ececec;
+            --card-shadow: rgba(0, 0, 0, 0.06);
+            --welcome-bg: #ffffff;
+            --welcome-text: #555;
+            --welcome-title: #b35c00;
+            --card-text: #777;
+        }
+
+        body.dark {
+            --bg: #2b2b2b;
+            --text: #eeeeee;
+            --sidebar-bg: #333333;
+            --sidebar-border: #444;
+            --sidebar-text: #dddddd;
+            --sidebar-hover-bg: #ffb300;
+            --sidebar-hover-text: #1a1a1a;
+            --card-bg: #3a3a3a;
+            --card-border: #4a4a4a;
+            --card-shadow: rgba(0, 0, 0, 0.35);
+            --welcome-bg: #3a3a3a;
+            --welcome-text: #cccccc;
+            --welcome-title: #ffb300;
+            --card-text: #bbbbbb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body {
+            background: var(--bg);
+            min-height: 100vh;
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .topbar {
+            height: 60px;
+            background: linear-gradient(135deg, #ff8c00, #ffb300);
+            color: #1a1a1a;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 25px;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            box-shadow: 0 2px 10px rgba(255, 140, 0, 0.25);
+        }
+        .topbar .logo { font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .topbar .top-actions { display: flex; gap: 10px; align-items: center; }
+        .topbar .top-actions a,
+        .topbar .top-actions button {
+            color: #1a1a1a; text-decoration: none;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 8px 14px; border-radius: 6px;
+            font-size: 14px; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: background 0.2s;
+            border: none; cursor: pointer; font-family: inherit;
+        }
+        .topbar .top-actions a:hover,
+        .topbar .top-actions button:hover { background: rgba(0, 0, 0, 0.2); }
+
+        .sidebar {
+            width: 240px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--sidebar-border);
+            position: fixed; top: 60px; bottom: 0; left: 0;
+            padding: 20px 0; overflow-y: auto;
+            transition: background 0.3s, border-color 0.3s;
+        }
+        .sidebar h3 {
+            font-size: 12px; text-transform: uppercase;
+            color: #d97a00; padding: 0 22px;
+            margin-bottom: 10px; letter-spacing: 1px;
+        }
+        .sidebar nav a {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 22px; color: var(--sidebar-text);
+            text-decoration: none; font-size: 14px;
+            border-left: 3px solid transparent;
+            transition: background 0.15s, color 0.15s;
+        }
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background: var(--sidebar-hover-bg);
+            color: var(--sidebar-hover-text);
+            border-left: 3px solid #ff8c00;
+            font-weight: 600;
+        }
+        .sidebar nav a i { width: 18px; text-align: center; }
+
+        .main {
+            margin-top: 60px; margin-left: 240px;
+            padding: 30px; min-height: calc(100vh - 60px);
+        }
+
+        .welcome {
+            background: var(--welcome-bg);
+            border-radius: 12px;
+            padding: 25px 30px;
+            box-shadow: 0 5px 20px var(--card-shadow);
+            border-left: 4px solid #ffb300;
+            margin-bottom: 30px;
+            transition: background 0.3s;
+        }
+        .welcome h2 { color: var(--welcome-title); margin-bottom: 6px; }
+        .welcome p { color: var(--welcome-text); }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--card-shadow);
+            border: 1px solid var(--card-border);
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s, background 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #ffb300;
+            box-shadow: 0 8px 22px rgba(255, 140, 0, 0.15);
+        }
+        .card i { font-size: 32px; color: #ff8c00; margin-bottom: 10px; }
+        .card h3 { font-size: 16px; color: var(--welcome-title); margin-bottom: 5px; }
+        .card p { font-size: 13px; color: var(--card-text); }
+    </style>
+</head>
+<body>
+
+    <header class="topbar">
+        <div class="logo"><i class="fas fa-shield-halved"></i> SGSF</div>
+        <div class="top-actions">
+            <button type="button" id="themeToggle" title="Cambiar tema">
+                <i class="fas fa-moon" id="themeIcon"></i>
+                <span id="themeLabel">Oscuro</span>
+            </button>
+            <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
+            <a href="#"><i class="fas fa-user"></i> {{ usuario|default:"admin" }}</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Salir</a>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <h3>Menú Principal</h3>
+        <nav>
+            <a href="{% url 'panel' %}" class="{% if request.resolver_match.url_name == 'panel' %}active{% endif %}">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="#"><i class="fas fa-users"></i> Clientes</a>
+            <a href="#"><i class="fas fa-file-invoice"></i> Documentos</a>
+            <a href="#"><i class="fas fa-chart-line"></i> Reportes</a>
+            <a href="#"><i class="fas fa-cog"></i> Configuración</a>
+        </nav>
+
+        <h3 style="margin-top: 30px;">Soporte</h3>
+        <nav>
+            <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+            <a href="#"><i class="fas fa-info-circle"></i> Acerca de</a>
+        </nav>
+    </aside>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script>
+        (function () {
+            const body = document.body;
+            const toggle = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            const label = document.getElementById('themeLabel');
+
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    body.classList.add('dark');
+                    icon.classList.replace('fa-moon', 'fa-sun');
+                    label.textContent = 'Claro';
+                } else {
+                    body.classList.remove('dark');
+                    icon.classList.replace('fa-sun', 'fa-moon');
+                    label.textContent = 'Oscuro';
+                }
+            }
+
+            // Cargar preferencia guardada
+            const saved = localStorage.getItem('sgфTheme') || localStorage.getItem('sgsfTheme') || 'light';
+            applyTheme(saved);
+
+            toggle.addEventListener('click', function () {
+                const next = body.classList.contains('dark') ? 'light' : 'dark';
+                applyTheme(next);
+                localStorage.setItem('sgsfTheme', next);
+            });
+        })();
+    </script>
+
+</body>
+</html>

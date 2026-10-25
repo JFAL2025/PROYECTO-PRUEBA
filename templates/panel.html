@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Panel General - SGSF{% endblock %}
+
+{% block content %}
+    <div class="welcome">
+        <h2>Bienvenido, {{ usuario }}</h2>
+        <p>Este es tu panel general del Sistema de Gestión SGSF.</p>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <i class="fas fa-users"></i>
+            <h3>Clientes</h3>
+            <p>Gestión de clientes</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-file-invoice"></i>
+            <h3>Documentos</h3>
+            <p>Administración de documentos</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-chart-line"></i>
+            <h3>Reportes</h3>
+            <p>Estadísticas y reportes</p>
+        </div>
+        <div class="card">
+            <i class="fas fa-cog"></i>
+            <h3>Configuración</h3>
+            <p>Ajustes del sistema</p>
+        </div>
+    </div>
+{% endblock %}

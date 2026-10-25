@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - SGSF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h1><i class="fas fa-lock"></i> Iniciar Sesión</h1>
+            <p class="subtitle">Sistema de Gestión SGSF</p>
+
+            {% if form.non_field_errors %}
+                <div class="error">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="{% if message.tags == 'error' %}error{% else %}success{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" id="loginForm" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ next }}">
+
+                <div class="form-group">
+                    <label for="id_username">Usuario</label>
+                    <input type="text" name="username" id="id_username"
+                           value="{{ form.username.value|default:'' }}"
+                           autocomplete="username" required autofocus>
+                    {% if form.username.errors %}
+                        <small class="field-error">{{ form.username.errors.0 }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password">
+                        <span>Contraseña</span>
+                        <button type="button" class="toggle-password" id="togglePassword" aria-label="Mostrar contraseña">
+                            <i class="fas fa-eye"></i>
+                            <span class="label-text">Mostrar</span>
+                        </button>
+                    </label>
+                    <input type="password" name="password" id="id_password"
+                           autocomplete="current-password" required>
+                    {% if form.password.errors %}
+                        <small class="field-error">{{ form.password.errors.0 }}</small>
+                    {% endif %}
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" name="remember_me" id="remember_me">
+                    <label for="remember_me">Recordarme</label>
+                </div>
+
+                <button type="submit">Ingresar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('id_password');
+            const labelText = togglePassword.querySelector('.label-text');
+
+            togglePassword.addEventListener('click', function (e) {
+                e.preventDefault();
+                const isPassword = passwordInput.getAttribute('type') === 'password';
+                const icon = this.querySelector('i');
+
+                if (isPassword) {
+                    passwordInput.setAttribute('type', 'text');
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                    labelText.textContent = 'Ocultar';
+                    this.setAttribute('aria-label', 'Ocultar contraseña');
+                } else {
+                    passwordInput.setAttribute('type', 'password');
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                    labelText.textContent = 'Mostrar';
+                    this.setAttribute('aria-label', 'Mostrar contraseña');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
