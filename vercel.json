@@ -1,19 +1,10 @@
 {
-  "buildCommand": "python manage.py collectstatic --no-input",
+  
   "builds": [
     {
       "src": "SGSF/wsgi.py",
       "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/staticfiles/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "SGSF/wsgi.py"
+    
     }
   ]
 }

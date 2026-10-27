@@ -6,7 +6,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SGSF.settings')
 
 django_app = get_wsgi_application()
 
-# Le decimos a WhiteNoise que busque en 'staticfiles' (la carpeta que creará Vercel)
-application = WhiteNoise(django_app, root=os.path.join(os.path.dirname(os.path.dirname(__file__)), 'staticfiles'))
+# Apuntamos a la carpeta 'static' que ya está en tu repositorio
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+application = WhiteNoise(django_app, root=os.path.join(BASE_DIR, 'static'))
 
 app = application
