@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-if=z933r%cdk7z3ukebu!t^d%we022ee04plt*)75t)67#kom0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.vercel.app']
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -113,18 +112,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 
-# 1. La carpeta donde Vercel guardará el CSS para producción
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-# 2. La carpeta de desarrollo (tu CSS actual)
+# Si tienes una carpeta static global en la raíz del proyecto, añádela aquí:
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / 'static', 
 ]
-
-# 3. La configuración de WhiteNoise
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
