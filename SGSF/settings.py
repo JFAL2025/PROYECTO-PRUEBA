@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -112,12 +113,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
-STATIC_URL = 'static/'
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
 
-# Si tienes una carpeta static global en la raíz del proyecto, añádela aquí:
+# 1. La carpeta donde Vercel guardará el CSS para producción
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# 2. La carpeta de desarrollo (tu CSS actual)
 STATICFILES_DIRS = [
-    BASE_DIR / 'static', 
+    BASE_DIR / 'static',
 ]
+
+# 3. La configuración de WhiteNoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
 
