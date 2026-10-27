@@ -1,0 +1,25 @@
+33de9dd - JFAL2025, 18 minutes ago : Agregar vistas de login, panel y restaurar requirements
+4179309 - JFAL2025, 30 minutes ago : Mover requirements.txt a la carpeta del proyecto
+86409ae - JFAL2025, 39 minutes ago : Dejar que Vercel maneje estaticos automaticamente
+520b870 - JFAL2025, 44 minutes ago : Configuracion definitiva para cargar CSS en Vercel
+fb9715b - JFAL2025, 48 minutes ago : Eliminando dependencia de base de datos para Vercel
+8f12d51 - JFAL2025, 51 minutes ago : Restaurar enrutamiento a Django y WhiteNoise desde static
+3b10ec3 - JFAL2025, 52 minutes ago : Fix: WhiteNoise apuntando a carpeta static original
+6d61e59 - JFAL2025, 54 minutes ago : Fix: Forzar collectstatic en Vercel
+9d6601b - JFAL2025, 58 minutes ago : Configuracion definitiva de estaticos para Vercel
+595fd62 - JFAL2025, 63 minutes ago : Configuracion final para local y ajustes de estaticos
+bae7583 - JFAL2025, 69 minutes ago : Guardando configuracion local
+5328b22 - JFAL2025, 77 minutes ago : Fix: Cambiar storage de WhiteNoise para evitar 404 en Vercel
+8547a3d - JFAL2025, 2 hours ago : Envolver WSGI con WhiteNoise para servir estáticos en Vercel
+9886612 - JFAL2025, 2 hours ago : Agregar comando collectstatic en vercel.json
+27a5593 - JFAL2025, 2 hours ago : Configurar STATIC_ROOT y WhiteNoise para Vercel
+13211c2 - JFAL2025, 2 hours ago : Mover requirements.txt a la raiz del proyecto
+85a1885 - JFAL2025, 9 hours ago : Ajustes finales para Vercel (ALLOWED_HOSTS, SECRET_KEY)
+9859b91 - JFAL2025, 9 hours ago : Agregar dominio de Vercel a ALLOWED_HOSTS
+15549ab - JFAL2025, 9 hours ago : Update requirements.txt
+d6e424b - JFAL2025, 9 hours ago : Corregir requirements.txt (UTF-8 sin BOM) y actualizar settings
+d4b1b3b - JFAL2025, 9 hours ago : Corregir contenido de requirements.txt
+27d9330 - JFAL2025, 10 hours ago : Corregir requirements.txt a UTF-8 sin BOM
+3efe95c - JFAL2025, 35 hours ago : Agregar dependencias de producción
+13ff2e1 - JFAL2025, 35 hours ago : Agregar .gitignore
+37ddcf4 - JFAL2025, 35 hours ago : Primer commit: estructura N-Capas Django SGSF
