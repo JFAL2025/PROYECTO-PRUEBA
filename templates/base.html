@@ -201,7 +201,7 @@
             }
 
             // Cargar preferencia guardada
-            const saved = localStorage.getItem('sgфTheme') || localStorage.getItem('sgsfTheme') || 'light';
+            const saved = localStorage.getItem('sgsfTheme') || 'light';
             applyTheme(saved);
 
             toggle.addEventListener('click', function () {
@@ -210,6 +210,16 @@
                 localStorage.setItem('sgsfTheme', next);
             });
         })();
+    </script>
+
+    <!-- SCRIPT DE SEGURIDAD PARA EVITAR EL BOTÓN ATRÁS -->
+    <script>
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                // Si la página se carga desde la caché del navegador, forzamos la recarga
+                window.location.reload();
+            }
+        });
     </script>
 
 </body>
